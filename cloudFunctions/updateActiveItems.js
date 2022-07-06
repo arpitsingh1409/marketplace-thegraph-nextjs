@@ -10,6 +10,19 @@ Moralis.Cloud.afterSave("ItemListed", async (request) => {
     query.equalTo("marketplaceAddress", request.object.get("address"));
     query.equalTo("nftAddress", request.object.get("nftAddress"));
     query.equalTo("tokenId", request.object.get("tokenId"));
+    query.equalTo("seller", request.object.get("seller"));
+    const alreadyListedItem = await query.first();
+    if (alreadyListedItem) {
+      logger.info(`Deleting already listed ${request.object.get("objectId")}`);
+      await alreadyListedItem.destroy();
+      logger.info(
+        `Deleting ${request.object.get(
+          "tokenId"
+        )} at address ${request.object.get(
+          "address"
+        )} since it is already listed!`
+      );
+    }
 
     const activeItem = new ActiveItem();
     activeItem.set("marketplaceAddress", request.object.get("address"));
