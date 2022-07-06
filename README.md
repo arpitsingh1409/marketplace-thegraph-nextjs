@@ -1,7 +1,3 @@
-1. Home Page:
-   1. Show recently listed NFTs
-      1. If you own the NFT, you can update the listing
-      2. If not, you can buy that listed NFT
-   
-2. Sell Page:
-   1. You can list your NFT on the marketplace
+1. Same frontend design as Moralis, but instead of reading the events from Moralis (a centralised server), we will:
+   1. Index them with TheGraph (which is totally decentralised)
+   2. Read the events from TheGraph
